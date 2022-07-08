@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
 import Sort from '../components/Sort';
 
-function Home(props) {
+function Home({ searchValue }) {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
@@ -16,10 +16,12 @@ function Home(props) {
 
   useEffect(() => {
     setIsLoading(true);
+    const category = categoryId > 0 ? `category=${categoryId}` : ``;
+    const sortBy = sortType.sortBy;
+    const order = orderSort ? `asc` : `desc`;
+    const search = searchValue ? `search=${searchValue}` : ``;
     fetch(
-      `https://62bdd39cc5ad14c110c766bb.mockapi.io/pizzas?${
-        categoryId > 0 ? `category=${categoryId}` : ``
-      }&sortBy=${sortType.sortBy}&order=${orderSort ? `asc` : `desc`}`
+      `https://62bdd39cc5ad14c110c766bb.mockapi.io/pizzas?${category}&sortBy=${sortBy}&order=${order}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -27,9 +29,14 @@ function Home(props) {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType, orderSort]);
+  }, [categoryId, sortType, orderSort, searchValue]);
 
-  console.log(orderSort);
+  const pizzasMapped = pizzas
+    .filter((e) => e.title.toLowerCase().includes(searchValue.toLowerCase()))
+    .map((item) => <PizzaBlock {...item} key={item.id} />);
+  const loaderMapped = [...Array(10)].map((_, index) => <Loader key={index} />);
+
+  //
 
   return (
     <div className="container">
@@ -47,9 +54,7 @@ function Home(props) {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {isLoading
-          ? [...Array(10)].map((_, index) => <Loader key={index} />)
-          : pizzas.map((item) => <PizzaBlock {...item} key={item.id} />)}
+        {isLoading ? loaderMapped : pizzasMapped}
       </div>
     </div>
   );

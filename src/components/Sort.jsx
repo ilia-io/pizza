@@ -1,27 +1,34 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { setSort, setOrderSort } from '../redux/slices/filterSlice';
 
-function Sort({ orderSort, setOrderSort }) {
+export const listExport = [
+  { name: 'популярности', sortBy: 'rating' },
+  { name: 'цене', sortBy: 'price' },
+  { name: 'алфавиту', sortBy: 'title' },
+];
+
+function Sort({}) {
   const [sortPopup, setSortPopup] = useState(false);
-  const list = [
-    { name: 'популярности', sortBy: 'rating' },
-    { name: 'цене', sortBy: 'price' },
-    { name: 'алфавиту', sortBy: 'title' },
-  ];
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const { sort, orderSort } = useSelector((state) => state.filter);
 
   function handleSort(obj) {
     dispatch(setSort(obj));
     setSortPopup(false);
   }
 
+  const list = [
+    { name: 'популярности', sortBy: 'rating' },
+    { name: 'цене', sortBy: 'price' },
+    { name: 'алфавиту', sortBy: 'title' },
+  ];
+
   return (
     <div className="sort">
       <div className="sort__label">
         <svg
-          onClick={() => setOrderSort(!orderSort)}
+          onClick={() => dispatch(setOrderSort(!orderSort))}
           className={orderSort ? '' : 'active'}
           width="20"
           height="20"

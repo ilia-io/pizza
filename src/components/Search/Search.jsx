@@ -1,16 +1,29 @@
-import { useRef } from 'react';
-import { useContext } from 'react';
+import debounce from 'lodash.debounce';
+import { useRef, useState, useCallback, useContext } from 'react';
 import { AppContext } from '../../App';
 import styles from './Search.module.scss';
 
 function Search({}) {
   const { searchValue, setSearchValue } = useContext(AppContext);
+  const [value, setValue] = useState('');
+  const inputRef = useRef();
 
-  const inputRef = useRef(null);
+  const memoizedDebounce = useCallback(
+    debounce((val) => {
+      setSearchValue(val);
+    }, 400),
+    []
+  );
 
   const onClear = () => {
+    setValue('');
     setSearchValue('');
     inputRef.current.focus();
+  };
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    memoizedDebounce(e.target.value);
   };
 
   return (
@@ -52,11 +65,11 @@ function Search({}) {
       <input
         type="text"
         placeholder="Поиск пиццы..."
-        onChange={(e) => setSearchValue(e.target.value)}
-        value={searchValue}
+        onChange={(e) => onChangeInput(e)}
+        value={value}
         ref={inputRef}
       />
-      {searchValue && (
+      {value && (
         <svg
           onClick={() => onClear()}
           className={styles.close}

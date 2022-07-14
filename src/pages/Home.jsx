@@ -35,11 +35,11 @@ function Home({}) {
     const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const sortBy = sort.sortBy;
     const order = orderSort ? `asc` : `desc`;
-    const search = searchValue ? `search=${searchValue}` : ``;
+    const search = searchValue ? `title=${searchValue}` : ``;
 
     axios
       .get(
-        `https://62bdd39cc5ad14c110c766bb.mockapi.io/pizzas?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&search=${search}`
+        `https://62bdd39cc5ad14c110c766bb.mockapi.io/pizzas?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`
       )
       .then((res) => {
         setPizzas(res.data);
@@ -81,10 +81,9 @@ function Home({}) {
   //Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
     window.scrollTo(0, 0);
-    //if (isSearch.current) {
-    //}
-    fetchPizzas();
-
+    if (!isSearch.current) {
+      fetchPizzas();
+    }
     isSearch.current = false;
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
@@ -116,10 +115,7 @@ function Home({}) {
       <div className="content__items">
         {isLoading ? loaderMapped : pizzasMapped}
       </div>
-      <Pagination
-        value={currentPage}
-        onPageChange={(number) => onChangePage(number)}
-      />
+      <Pagination value={currentPage} onPageChange={onChangePage} />
     </div>
   );
 }

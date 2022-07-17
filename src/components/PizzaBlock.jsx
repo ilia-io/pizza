@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../redux/slices/cartSlice';
 
-const typeNames = ['традиционное', 'тонкое'];
+const typeNames = ['тонкое', 'традиционное'];
 
 function PizzaBlock({ title, price, imageUrl, sizes, types, id }) {
   const [activeSize, setActiveSize] = useState(0);
@@ -20,7 +20,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types, id }) {
       title,
       imageUrl,
       type: typeNames[activeType],
-      size: activeSize,
+      size: sizes[activeSize],
     };
     dispatch(addItem(item));
   };
@@ -37,7 +37,7 @@ function PizzaBlock({ title, price, imageUrl, sizes, types, id }) {
               className={activeType === index ? 'active' : ''}
               key={index}
             >
-              {item ? typeNames[0] : typeNames[1]}
+              {item ? typeNames[1] : typeNames[0]}
             </li>
           ))}
         </ul>

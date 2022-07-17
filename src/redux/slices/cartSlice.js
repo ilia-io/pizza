@@ -7,12 +7,8 @@ export const cartSlice = createSlice({
     items: [],
   },
   reducers: {
-    // addItem(state, action) {
-    //   state.items.push(action.payload);
-    //   //state.totalPrice += action.payload.price;
-    //   state.totalPrice = state.items.reduce((sum, obj) => obj.price + sum, 0);
-    // },
     addItem(state, action) {
+      //state.totalPrice += action.payload.price;
       const findItem = state.items.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
@@ -29,14 +25,34 @@ export const cartSlice = createSlice({
     },
     removeItem(state, action) {
       state.items = state.items.filter((a) => a.id !== action.payload);
+      state.totalPrice = state.items.reduce(
+        (sum, obj) => obj.price * obj.count + sum,
+        0
+      );
     },
     clearCart(state) {
       state.items = [];
+      state.totalPrice = state.items.reduce(
+        (sum, obj) => obj.price * obj.count + sum,
+        0
+      );
+    },
+    minusItem(state, action) {
+      const findItem = state.items.find((obj) => obj.id === action.payload);
+      if (findItem && findItem.count > 1) {
+        findItem.count--;
+      } else {
+        state.items = state.items.filter((a) => a.id !== action.payload);
+      }
+      state.totalPrice = state.items.reduce(
+        (sum, obj) => obj.price * obj.count + sum,
+        0
+      );
     },
   },
 });
 
-export const { setTotalPrice, addItem, removeItem, clearCart } =
+export const { setTotalPrice, addItem, removeItem, clearCart, minusItem } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

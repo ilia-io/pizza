@@ -4,7 +4,6 @@ import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
 import Sort, { listExport } from '../components/Sort';
 import Pagination from '../components/Pagination/Pagination';
-import { AppContext } from '../App';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCategoryId,
@@ -15,6 +14,7 @@ import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
+import { AppContext } from '../components/Layout';
 
 function Home({}) {
   const isSearch = useRef(false);
@@ -85,9 +85,7 @@ function Home({}) {
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
   const pizzasMapped = items.map((item) => (
-    <Link to={`/pizza/${item.id}`} key={item.id}>
-      <PizzaBlock {...item} />
-    </Link>
+      <PizzaBlock key={item.id} {...item} />
   ));
   const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
 

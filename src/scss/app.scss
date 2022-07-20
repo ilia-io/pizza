@@ -360,8 +360,10 @@ body {
   align-items: center;
 
   h2 {
-    padding: 20px;
+    padding: 30px;
     font-size: 36px;
+    width: 100px;
+    text-align: center;
   }
 }
 
@@ -382,5 +384,6 @@ body {
 
   img {
     transform: translateX(10px);
+    text-align: center;
   }
 }

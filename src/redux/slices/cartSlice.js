@@ -52,6 +52,8 @@ export const cartSlice = createSlice({
   },
 });
 
+export const cartSelector = (state) => state.cart;
+
 export const { setTotalPrice, addItem, removeItem, clearCart, minusItem } =
   cartSlice.actions;
 

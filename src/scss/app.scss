@@ -353,3 +353,34 @@ body {
     margin: 30px auto;
   }
 }
+
+.count-pizza {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    padding: 20px;
+    font-size: 36px;
+  }
+}
+
+.main-pizza {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  h2 {
+    padding: 20px;
+    font-size: 36px;
+  }
+
+  p {
+    font-size: 22px;
+    padding: 6px;
+  }
+
+  img {
+    transform: translateX(10px);
+  }
+}

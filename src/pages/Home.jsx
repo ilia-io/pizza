@@ -12,7 +12,7 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
 
@@ -85,7 +85,9 @@ function Home({}) {
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
   const pizzasMapped = items.map((item) => (
-    <PizzaBlock {...item} key={item.id} />
+    <Link to={`/pizza/${item.id}`} key={item.id}>
+      <PizzaBlock {...item} />
+    </Link>
   ));
   const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
 
@@ -113,15 +115,13 @@ function Home({}) {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (
-        <div class="error--info">
-          <h2>
-            Произошла ошибка <icon>😕</icon>
-          </h2>
+        <div className="error--info">
+          <h2>Произошла ошибка 😕</h2>
           <p>
             К сожалению не удалось получить пиццы. <br />
             Попробуйте повторить попытку позже.
           </p>
-          <a class="button button--black">
+          <a className="button button--black">
             <span onClick={onClickReloadPage}>Обновить</span>
           </a>
         </div>

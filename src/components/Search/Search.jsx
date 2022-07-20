@@ -4,7 +4,7 @@ import { AppContext } from '../../App';
 import styles from './Search.module.scss';
 
 function Search({}) {
-  const { searchValue, setSearchValue } = useContext(AppContext);
+  const { setSearchValue } = useContext(AppContext);
   const [value, setValue] = useState('');
   const inputRef = useRef();
 

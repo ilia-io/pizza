@@ -1,19 +1,21 @@
 @import "../variables";
+@import url("https://fonts.googleapis.com/css2?family=Tienne:wght@400;700;900&display=swap");
 
 .header {
   border-bottom: 1px solid $gray-line;
-  padding: 40px 0;
+  padding: 30px 0 20px;
 
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0 auto;
+    p {
+      width: 160px;
+    }
 
-    @media (max-width: 525px) {
+    @media (max-width: 910px) {
       flex-flow: column;
-      p {
-        margin-bottom: 20px;
-      }
     }
   }
 
@@ -26,10 +28,11 @@
 
     h1 {
       color: #181818;
-      font-size: 24px;
+      font-size: 30px;
       letter-spacing: 1%;
       text-transform: uppercase;
-      font-weight: 800;
+      font-weight: 700;
+      font-family: "Tienne", serif;
     }
 
     p {

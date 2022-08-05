@@ -2,8 +2,6 @@ import { Link, useLocation } from 'react-router-dom';
 import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../redux/slices/cartSlice';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 function Header({}) {
   const { items, totalPrice } = useSelector(cartSelector);
@@ -15,9 +13,9 @@ function Header({}) {
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="38" src="/img/pizza-logo.svg" alt="Pizza logo" />
+            <img width={55} height={55} src="logo192.png" alt="Pizza logo" />
             <div>
-              <h1>React Pizza</h1>
+              <h1>JoJo Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>

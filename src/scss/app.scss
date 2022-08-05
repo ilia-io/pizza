@@ -24,21 +24,18 @@ body {
 }
 
 .content {
-  padding: 40px 0;
+  padding: 20px 0;
 
   &__title {
-    margin: 50px auto;
+    margin: 30px auto;
     font-weight: 800;
     font-size: 38px;
   }
 
   &__items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    // grid-template-columns: repeat(4, 1fr);
-    // grid-template-rows: repeat(2, 1fr);
-    // grid-column-gap: 20px;
-    // grid-row-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     @media (max-width: 730px) {
       display: flex;
       flex-wrap: wrap;

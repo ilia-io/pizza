@@ -11,7 +11,7 @@ import {
   setFilters,
 } from '../redux/slices/filterSlice';
 import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
 import { AppContext } from '../components/Layout';
@@ -85,7 +85,7 @@ function Home({}) {
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
   const pizzasMapped = items.map((item) => (
-      <PizzaBlock key={item.id} {...item} />
+    <PizzaBlock key={item.id} {...item} />
   ));
   const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
 

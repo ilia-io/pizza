@@ -14,13 +14,14 @@
       width: 160px;
     }
 
-    @media (max-width: 910px) {
+    @media (max-width: 930px) {
       flex-flow: column;
     }
   }
 
   &__logo {
     display: flex;
+    align-items: center;
 
     img {
       margin-right: 15px;

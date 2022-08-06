@@ -1,6 +1,6 @@
 import NotFoundBlock from "../components/NotFoundBlock";
 
-function NotFound(props) {
+function NotFound() {
   return (
     <NotFoundBlock />
   );

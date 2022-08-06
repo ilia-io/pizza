@@ -4,7 +4,7 @@ import CartItem from '../components/CartItem';
 import { cartSelector, clearCart } from '../redux/slices/cartSlice';
 import CartEmpty from '../components/CartEmpty';
 
-function Cart(props) {
+function Cart() {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
   const totalAmount = items.reduce((sum, item) => item.count + sum, 0);

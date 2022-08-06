@@ -47,12 +47,7 @@ function FullPizza({}) {
           Рейтинг: {rating} <br />
         </p>
         <p>Цена: от {price} ₽</p>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error
-          veritatis ad placeat officia consectetur quos cupiditate, aperiam
-          quod. Itaque voluptas velit numquam laborum dignissimos dolores
-          provident aperiam atque, illum mollitia.
-        </p>
+        <p>{/* Description */}</p>
       </main>
     </div>
   );

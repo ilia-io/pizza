@@ -12,5 +12,5 @@
 - React Hooks
 - CSS-Modules / SCSS
 - React Content Loader (скелетон)
-- React Pagination (пагинация)
+- React Pagination
 - Lodash.Debounce

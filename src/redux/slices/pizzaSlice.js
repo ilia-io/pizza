@@ -6,7 +6,7 @@ export const fetchPizza = createAsyncThunk(
   async (params) => {
     const { category, sortBy, order, search, currentPage } = params;
     const { data } = await axios.get(
-      `process.env.API_URL?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`
+      `${process.env.API_URL}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}&${search}`
     );
     return data;
   }

@@ -29,7 +29,7 @@ function CartItem({ id, title, price, count, imageUrl, type, size }) {
       </div>
       <div class="cart__item-count">
         <div
-          onClick={onClickMinus}
+          onClick={count > 1 ? onClickMinus : onClickRemove}
           class="button button--outline button--circle cart__item-count-minus"
         >
           <svg

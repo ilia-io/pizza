@@ -1,6 +1,6 @@
 import styles from './NotFoundBlock.module.scss';
 
-function NotFoundBlock(props) {
+const NotFoundBlock: React.FC = () => {
   return (
     <div className={styles.root}>
       <h1>
@@ -13,6 +13,6 @@ function NotFoundBlock(props) {
       </p>
     </div>
   );
-}
+};
 
 export default NotFoundBlock;

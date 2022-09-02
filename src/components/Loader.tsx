@@ -1,7 +1,6 @@
-import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-function Loader(props) {
+function Loader(props: any) {
   return (
     <ContentLoader
       className="pizza-block"

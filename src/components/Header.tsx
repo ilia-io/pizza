@@ -3,9 +3,12 @@ import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../redux/slices/cartSlice';
 
-function Header({}) {
+function Header() {
   const { items, totalPrice } = useSelector(cartSelector);
-  const totalAmount = items.reduce((sum, item) => item.count + sum, 0);
+  const totalAmount = items.reduce(
+    (sum: number, item: { count: number }) => item.count + sum,
+    0
+  );
   const { pathname } = useLocation();
 
   return (

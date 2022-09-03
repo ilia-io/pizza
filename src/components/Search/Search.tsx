@@ -3,10 +3,10 @@ import { useRef, useState, useCallback, useContext } from 'react';
 import { AppContext } from '../Layout';
 import styles from './Search.module.scss';
 
-function Search({}) {
+const Search: React.FC = () => {
   const { setSearchValue } = useContext(AppContext);
   const [value, setValue] = useState('');
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const memoizedDebounce = useCallback(
     debounce((val) => {
@@ -18,10 +18,10 @@ function Search({}) {
   const onClear = () => {
     setValue('');
     setSearchValue('');
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: any) => {
     setValue(e.target.value);
     memoizedDebounce(e.target.value);
   };
@@ -81,6 +81,6 @@ function Search({}) {
       )}
     </div>
   );
-}
+};
 
 export default Search;

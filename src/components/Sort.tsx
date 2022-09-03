@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSort, setOrderSort } from '../redux/slices/filterSlice';
@@ -14,7 +14,7 @@ export const listExport: Sort[] = [
   { name: 'алфавиту', sortBy: 'title' },
 ];
 
-const Sort:React.FC = () => {
+const Sort: React.FC = () => {
   const [sortPopup, setSortPopup] = useState(false);
   const dispatch = useDispatch();
   const { sort, orderSort } = useSelector((state: any) => state.filter);
@@ -26,9 +26,12 @@ const Sort:React.FC = () => {
   }
 
   useEffect(() => {
-    const handleClickOutOfSort = (e: any) => {
-      const path = e.path || e.composedPath();
-      if (!path.includes(sortRef.current)) {
+    const handleClickOutOfSort = (event: MouseEvent) => {
+      const _event = event as MouseEvent & {
+        path: Node[];
+      };
+      const path = _event.path || event.composedPath();
+      if (sortRef.current && !path.includes(sortRef.current)) {
         setSortPopup(false);
       }
     };
@@ -78,6 +81,6 @@ const Sort:React.FC = () => {
       )}
     </div>
   );
-}
+};
 
 export default Sort;

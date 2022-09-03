@@ -18,7 +18,7 @@ import { AppContext } from '../components/Layout';
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
-  const isMounted = useRef(false);
+  const isMounted = useRef<boolean>(false);
   const { searchValue } = useContext(AppContext);
   const { categoryId, sort, currentPage, orderSort } = useSelector(
     (state: any) => state.filter

@@ -9,8 +9,8 @@ const Search: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const memoizedDebounce = useCallback(
-    debounce((val) => {
-      setSearchValue(val);
+    debounce((value) => {
+      setSearchValue(value);
     }, 400),
     []
   );
@@ -21,7 +21,7 @@ const Search: React.FC = () => {
     inputRef.current?.focus();
   };
 
-  const onChangeInput = (e: any) => {
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     memoizedDebounce(e.target.value);
   };

@@ -2,10 +2,15 @@ import { createContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 
-export const AppContext = createContext();
+type SearchContext = {
+  searchValue: any;
+  setSearchValue: any;
+};
 
-function Layout({}) {
-  const [searchValue, setSearchValue] = useState('');
+export const AppContext = createContext({} as SearchContext);
+
+const Layout: React.FC = () => {
+  const [searchValue, setSearchValue] = useState();
 
   return (
     <div className="wrapper">
@@ -17,6 +22,6 @@ function Layout({}) {
       </AppContext.Provider>
     </div>
   );
-}
+};
 
 export default Layout;

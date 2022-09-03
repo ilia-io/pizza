@@ -4,10 +4,13 @@ import CartItem from '../components/CartItem';
 import { cartSelector, clearCart } from '../redux/slices/cartSlice';
 import CartEmpty from '../components/CartEmpty';
 
-function Cart() {
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const totalAmount = items.reduce((sum, item) => item.count + sum, 0);
+  const totalAmount = items.reduce(
+    (sum: number, item: any) => item.count + sum,
+    0
+  );
 
   const onClickClear = () => {
     if (window.confirm('Вы действительно хотите удалить все товары?')) {
@@ -20,9 +23,9 @@ function Cart() {
       {items.length === 0 ? (
         <CartEmpty />
       ) : (
-        <div class="cart">
-          <div class="cart__top">
-            <h2 class="content__title">
+        <div className="cart">
+          <div className="cart__top">
+            <h2 className="content__title">
               <svg
                 width="18"
                 height="18"
@@ -54,7 +57,7 @@ function Cart() {
               </svg>
               Корзина
             </h2>
-            <div onClick={onClickClear} class="cart__clear">
+            <div onClick={onClickClear} className="cart__clear">
               <svg
                 width="20"
                 height="20"
@@ -96,14 +99,14 @@ function Cart() {
             </div>
           </div>
 
-          <div class="content__items">
-            {items.map((item) => (
+          <div className="content__items">
+            {items.map((item: any) => (
               <CartItem key={item.id} {...item} />
             ))}
           </div>
 
-          <div class="cart__bottom">
-            <div class="cart__bottom-details">
+          <div className="cart__bottom">
+            <div className="cart__bottom-details">
               <span>
                 {' '}
                 Всего пицц: <b>{totalAmount} шт.</b>{' '}
@@ -113,10 +116,10 @@ function Cart() {
                 Сумма заказа: <b>{totalPrice} ₽</b>{' '}
               </span>
             </div>
-            <div class="cart__bottom-buttons">
+            <div className="cart__bottom-buttons">
               <Link
                 to="/"
-                class="button button--outline button--add go-back-btn"
+                className="button button--outline button--add go-back-btn"
               >
                 <svg
                   width="8"
@@ -136,7 +139,7 @@ function Cart() {
 
                 <span>Вернуться назад</span>
               </Link>
-              <div class="button pay-btn">
+              <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>
             </div>
@@ -145,6 +148,6 @@ function Cart() {
       )}
     </div>
   );
-}
+};
 
 export default Cart;

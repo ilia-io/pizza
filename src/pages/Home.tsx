@@ -16,14 +16,14 @@ import { useRef } from 'react';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
 import { AppContext } from '../components/Layout';
 
-function Home({}) {
+const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const { searchValue } = useContext(AppContext);
   const { categoryId, sort, currentPage, orderSort } = useSelector(
-    (state) => state.filter
+    (state: any) => state.filter
   );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { items, status } = useSelector((state: any) => state.pizza);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,6 +34,7 @@ function Home({}) {
     const search = searchValue ? `title=${searchValue}` : ``;
 
     dispatch(
+      // @ts-ignore
       fetchPizza({
         category,
         sortBy,
@@ -84,19 +85,19 @@ function Home({}) {
     isSearch.current = false;
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
-  const pizzasMapped = items.map((item) => (
+  const pizzasMapped = items.map((item: any) => (
     <PizzaBlock key={item.id} {...item} />
   ));
   const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
 
   //.filter((e) => e.title.toLowerCase().includes(searchValue.toLowerCase()))
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
     dispatch(setCurrentPage(1));
   };
-  const onChangePage = (number) => {
-    dispatch(setCurrentPage(number));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
   const onClickReloadPage = () => {
     window.location.reload();
@@ -132,6 +133,6 @@ function Home({}) {
       <Pagination value={currentPage} onPageChange={onChangePage} />
     </div>
   );
-}
+};
 
 export default Home;

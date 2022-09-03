@@ -1,6 +1,6 @@
 import ContentLoader from 'react-content-loader';
 
-function Loader(props: any) {
+const Loader: React.FC = (props) => {
   return (
     <ContentLoader
       className="pizza-block"
@@ -19,6 +19,6 @@ function Loader(props: any) {
       <rect x="130" y="425" rx="30" ry="30" width="150" height="45" />
     </ContentLoader>
   );
-}
+};
 
 export default Loader;

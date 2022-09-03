@@ -3,7 +3,7 @@ import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../redux/slices/cartSlice';
 
-function Header() {
+const Header:React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const totalAmount = items.reduce(
     (sum: number, item: { count: number }) => item.count + sum,

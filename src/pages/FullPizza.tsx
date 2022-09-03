@@ -22,7 +22,7 @@ const FullPizza: React.FC = () => {
         setPizzaData(data);
       } catch (error) {
         alert('Ошибка при загрузке пиццы');
-        console.error(error);
+        console.warn(error);
         navigate('/');
       }
     };
@@ -37,11 +37,21 @@ const FullPizza: React.FC = () => {
     <div className="container">
       <div className="count-pizza">
         <Link to={Number(id) > 0 ? `/pizza/${Number(id) - 1}` : `/pizza/0`}>
-          <img width={40} src="/img/arrow-left.png" alt="arrow left" />
+          <img
+            style={Number(id) === 0 ? { opacity: 0.2 } : {}}
+            width={40}
+            src="/img/arrow-left.png"
+            alt="arrow left"
+          />
         </Link>
         <h2>{Number(id) + 1}</h2>
         <Link to={Number(id) < 9 ? `/pizza/${Number(id) + 1}` : `/pizza/9`}>
-          <img width={40} src="/img/arrow-right.png" alt="arrow right" />
+          <img
+            style={Number(id) === 9 ? { opacity: 0.2 } : {}}
+            width={40}
+            src="/img/arrow-right.png"
+            alt="arrow right"
+          />
         </Link>
       </div>
       <main className="main-pizza">

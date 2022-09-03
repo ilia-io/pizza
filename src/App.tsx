@@ -6,7 +6,7 @@ import Cart from './pages/Cart';
 import FullPizza from './pages/FullPizza';
 import Layout from './components/Layout';
 
-function App() {
+const App:React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

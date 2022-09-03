@@ -14,7 +14,7 @@ export const listExport: Sort[] = [
   { name: 'алфавиту', sortBy: 'title' },
 ];
 
-function Sort() {
+const Sort:React.FC = () => {
   const [sortPopup, setSortPopup] = useState(false);
   const dispatch = useDispatch();
   const { sort, orderSort } = useSelector((state: any) => state.filter);
@@ -24,12 +24,6 @@ function Sort() {
     dispatch(setSort(obj));
     setSortPopup(false);
   }
-
-  const list = [
-    { name: 'популярности', sortBy: 'rating' },
-    { name: 'цене', sortBy: 'price' },
-    { name: 'алфавиту', sortBy: 'title' },
-  ];
 
   useEffect(() => {
     const handleClickOutOfSort = (e: any) => {
@@ -70,7 +64,7 @@ function Sort() {
       {sortPopup && (
         <div className="sort__popup">
           <ul>
-            {list.map((item, index) => (
+            {listExport.map((item, index) => (
               <li
                 onClick={() => handleSort(item)}
                 className={item.sortBy === sort.sortBy ? 'active' : ''}

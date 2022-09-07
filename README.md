@@ -4,10 +4,11 @@
 
 ### 🛠️ Технологии:
 
-- **ReactJS 18**
+- **TypeScript**
+- **React**
 - **Redux Toolkit**
-- **React Router 6**
-- **Axios**
+- **React Router**
+- Axios
 - Mock API (получаем пиццы с бэка)
 - React Hooks
 - CSS-Modules / SCSS

@@ -1,17 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+type Sort = {
+  name: string;
+  sortBy: 'rating' | 'title' | 'price';
+};
+
+interface FilterSliceState {
+  categoryId: number;
+  sort: Sort;
+  currentPage: number;
+  searchValue: string;
+  orderSort: boolean;
+}
+
+const initialState: FilterSliceState = {
+  categoryId: 0,
+  sort: {
+    name: 'популярности',
+    sortBy: 'rating',
+  },
+  currentPage: 1,
+  searchValue: '',
+  orderSort: false,
+};
+
 export const filterSlice = createSlice({
   name: 'filter',
-  initialState: {
-    categoryId: 0,
-    sort: {
-      name: 'популярности',
-      sortBy: 'rating',
-    },
-    currentPage: 1,
-    searchValue: '',
-    orderSort: false,
-  },
+  initialState,
   reducers: {
     setCategoryId(state, action) {
       state.categoryId = action.payload;

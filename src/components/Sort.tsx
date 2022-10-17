@@ -1,20 +1,15 @@
 import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSort, setOrderSort } from '../redux/slices/filterSlice';
-
-type Sort = {
-  name: string;
-  sortBy: string;
-};
+import { setSort, setOrderSort, Sort, SortPropEnum } from '../redux/slices/filterSlice';
 
 export const listExport: Sort[] = [
-  { name: 'популярности', sortBy: 'rating' },
-  { name: 'цене', sortBy: 'price' },
-  { name: 'алфавиту', sortBy: 'title' },
+  { name: 'популярности', sortBy: SortPropEnum.RATING },
+  { name: 'цене', sortBy: SortPropEnum.PRICE },
+  { name: 'алфавиту', sortBy: SortPropEnum.TITLE },
 ];
 
-const Sort: React.FC = () => {
+const SortPopup: React.FC = () => {
   const [sortPopup, setSortPopup] = useState(false);
   const dispatch = useDispatch();
   const { sort, orderSort } = useSelector((state: any) => state.filter);
@@ -83,4 +78,4 @@ const Sort: React.FC = () => {
   );
 };
 
-export default Sort;
+export default SortPopup;

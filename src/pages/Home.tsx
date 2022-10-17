@@ -2,19 +2,22 @@ import { useContext, useEffect } from 'react';
 import Categories from '../components/Categories';
 import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
-import Sort, { listExport } from '../components/Sort';
+import SortPopup, { listExport } from '../components/Sort';
 import Pagination from '../components/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import {
+  FilterSliceState,
   setCategoryId,
   setCurrentPage,
   setFilters,
+  SortPropEnum,
 } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import { fetchPizza } from '../redux/slices/pizzaSlice';
+import { fetchPizza, SearchPizzaParams } from '../redux/slices/pizzaSlice';
 import { AppContext } from '../components/Layout';
+import { useAppDispatch } from '../redux/store';
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
@@ -24,7 +27,7 @@ const Home: React.FC = () => {
     (state: any) => state.filter
   );
   const { items, status } = useSelector((state: any) => state.pizza);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const getPizzas = async function () {
@@ -34,7 +37,6 @@ const Home: React.FC = () => {
     const search = searchValue ? `title=${searchValue}` : ``;
 
     dispatch(
-      // @ts-ignore
       fetchPizza({
         category,
         sortBy,
@@ -62,19 +64,23 @@ const Home: React.FC = () => {
   //, searchValue
 
   //Если был первый рендер, проверяем URL-параметры и сохраняем в редаксе
-  useEffect(() => {
-    if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
-      const sort = listExport.find((obj) => obj.sortBy === params.sortBy);
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        })
-      );
-      isSearch.current = true;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.search) {
+  //     const params = qs.parse(
+  //       window.location.search.substring(1)
+  //     ) as unknown as SearchPizzaParams;
+  //     const sort = listExport.find((obj) => obj.sortBy === params.sortBy);
+  //     dispatch(
+  //       setFilters({
+  //         searchValue: params.search,
+  //         categoryId: Number(params.category),
+  //         currentPage: params.currentPage,
+  //         sort: sort || listExport[0],
+  //       })
+  //     );
+  //     isSearch.current = true;
+  //   }
+  // }, []);
 
   //Если был первый рендер, то запрашиваем пиццы
   useEffect(() => {
@@ -110,7 +116,7 @@ const Home: React.FC = () => {
           categoryId={categoryId}
           onChangeCategory={onChangeCategory}
         />
-        <Sort />
+        <SortPopup />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

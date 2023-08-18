@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import Categories from '../components/Categories';
 import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
@@ -98,17 +98,16 @@ const Home: React.FC = () => {
 
   //.filter((e) => e.title.toLowerCase().includes(searchValue.toLowerCase()))
 
-  const onChangeCategory = (id: number) => {
+  const onChangeCategory = useCallback((id: number) => {
     dispatch(setCategoryId(id));
     dispatch(setCurrentPage(1));
-  };
+  }, []);
   const onChangePage = (page: number) => {
     dispatch(setCurrentPage(page));
   };
   const onClickReloadPage = () => {
     window.location.reload();
   };
-
   return (
     <div className="container">
       <div className="content__top">

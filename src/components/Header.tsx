@@ -3,7 +3,7 @@ import Search from './Search/Search';
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../redux/slices/cartSlice';
 
-const Header:React.FC = () => {
+const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const totalAmount = items.reduce(
     (sum: number, item: { count: number }) => item.count + sum,
@@ -28,7 +28,7 @@ const Header:React.FC = () => {
             </div>
           </div>
         </Link>
-        <Search />
+        {pathname !== '/cart' && <Search />}
         <div className="header__cart">
           {pathname !== '/cart' && (
             <Link to="/cart" className="button button--cart">
@@ -70,6 +70,6 @@ const Header:React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

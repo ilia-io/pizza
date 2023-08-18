@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { setSort, setOrderSort, Sort, SortPropEnum } from '../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux';
+import {
+  setSort,
+  setOrderSort,
+  Sort,
+  SortPropEnum,
+} from '../redux/slices/filterSlice';
 
 export const listExport: Sort[] = [
   { name: 'популярности', sortBy: SortPropEnum.RATING },
@@ -9,10 +14,14 @@ export const listExport: Sort[] = [
   { name: 'алфавиту', sortBy: SortPropEnum.TITLE },
 ];
 
-const SortPopup: React.FC = () => {
+type TSortPopup = {
+  sort: Sort;
+  orderSort: boolean;
+};
+
+const SortPopup: React.FC<TSortPopup> = React.memo(({ sort, orderSort }) => {
   const [sortPopup, setSortPopup] = useState(false);
   const dispatch = useDispatch();
-  const { sort, orderSort } = useSelector((state: any) => state.filter);
   const sortRef = useRef<HTMLDivElement>(null);
 
   function handleSort(obj: Sort) {
@@ -76,6 +85,6 @@ const SortPopup: React.FC = () => {
       )}
     </div>
   );
-};
+});
 
 export default SortPopup;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useCallback } from 'react';
 import Categories from '../components/Categories';
 import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
-import SortPopup, { listExport } from '../components/Sort';
+import SortPopup, { listExport } from '../components/SortPopup';
 import Pagination from '../components/Pagination/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
           categoryId={categoryId}
           onChangeCategory={onChangeCategory}
         />
-        <SortPopup />
+        <SortPopup sort={sort} orderSort={orderSort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       {status === 'error' ? (

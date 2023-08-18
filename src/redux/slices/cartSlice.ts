@@ -9,7 +9,7 @@ export type TCartItem = {
   type: string;
   size: number;
   count: number;
-}
+};
 
 interface CartSliceState {
   totalPrice: number;
@@ -69,9 +69,8 @@ export const cartSlice = createSlice({
   },
 });
 
-export const cartSelector = (state:RootState) => state.cart;
+export const cartSelector = (state: RootState) => state.cart;
 
-export const { addItem, removeItem, clearCart, minusItem } =
-  cartSlice.actions;
+export const { addItem, removeItem, clearCart, minusItem } = cartSlice.actions;
 
 export default cartSlice.reducer;

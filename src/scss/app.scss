@@ -36,11 +36,13 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 8px;
     justify-content: center;
+
     @media (min-width: 740px) and (max-width: 1051px) {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
     }
+
     @media (max-width: 740px) {
       display: flex;
       flex-wrap: wrap;
@@ -71,6 +73,7 @@ body {
   &--cart {
     max-width: 820px;
     margin: 90px auto;
+
     .content__title {
       margin: 0;
     }
@@ -88,6 +91,7 @@ body {
     display: flex;
     align-items: center;
     font-size: 32px;
+
     @media (max-width: 730px) {
       font-size: 24px;
       margin-right: 2px;
@@ -103,6 +107,7 @@ body {
       width: 30px;
       height: 30px;
       margin-right: 10px;
+
       path {
         stroke: $black;
         stroke-width: 1.9;
@@ -137,6 +142,7 @@ body {
           stroke: darken($color: #b6b6b6, $amount: 50);
         }
       }
+
       span {
         color: darken($color: #b6b6b6, $amount: 50);
       }
@@ -153,7 +159,7 @@ body {
     padding-top: 20px;
     margin-top: 20px;
 
-    & > * {
+    &>* {
       flex: 0 1 100%;
     }
 
@@ -162,6 +168,7 @@ body {
         h3 {
           font-size: 20px !important;
         }
+
         p {
           font-size: 16px !important;
         }
@@ -172,12 +179,14 @@ body {
       display: flex;
       flex-wrap: wrap;
       padding: 0;
-      & > * {
+
+      &>* {
         align-items: center;
         justify-content: center;
         flex: 1 1 100%;
         margin: 5px auto;
       }
+
       &-img {
         img {
           width: 40% !important;
@@ -186,9 +195,11 @@ body {
           left: 4%;
         }
       }
+
       &-count {
         max-width: 110px;
       }
+
       &-price {
         min-width: 80px;
       }
@@ -248,6 +259,10 @@ body {
             display: none;
           }
         }
+
+        &--disabled:hover {
+          opacity: 0.4;
+        }
       }
 
       b {
@@ -291,6 +306,7 @@ body {
           height: 15px;
           position: relative;
         }
+
         &:hover,
         &:active {
           border-color: darken($color: $gray-line, $amount: 80);
@@ -309,10 +325,12 @@ body {
 
       span {
         font-size: 22px;
+
         @media (max-width: 570px) {
           width: 70px;
           margin: 0 auto;
         }
+
         &:last-of-type {
           b {
             color: $orange;
@@ -351,6 +369,7 @@ body {
 
         svg {
           margin-right: 12px;
+
           path {
             fill: transparent;
             stroke-width: 2;
@@ -407,11 +426,13 @@ body {
 .error--info {
   text-align: center;
   margin: 30px auto;
+
   h2 {
     font-size: 32px;
     font-weight: 700;
     line-height: 1.3;
   }
+
   p {
     font-size: 20px;
     margin: 30px auto;

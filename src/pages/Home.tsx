@@ -2,22 +2,16 @@ import { useContext, useEffect, useCallback } from 'react';
 import Categories from '../components/Categories';
 import Loader from '../components/Loader';
 import PizzaBlock from '../components/PizzaBlock';
-import SortPopup, { listExport } from '../components/SortPopup';
+import SortPopup from '../components/SortPopup';
 import Pagination from '../components/Pagination/Pagination';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  FilterSliceState,
-  setCategoryId,
-  setCurrentPage,
-  setFilters,
-  SortPropEnum,
-} from '../redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-import { fetchPizza, SearchPizzaParams } from '../redux/slices/pizzaSlice';
 import { AppContext } from '../components/Layout';
 import { useAppDispatch } from '../redux/store';
+import { fetchPizza } from '../redux/asyncActions';
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
@@ -30,7 +24,7 @@ const Home: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const getPizzas = async function () {
+  const getPizzas = async () => {
     const category = categoryId > 0 ? `category=${categoryId}` : ``;
     const sortBy = sort.sortBy;
     const order = orderSort ? `asc` : `desc`;

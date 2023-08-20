@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  setSort,
-  setOrderSort,
-  Sort,
-  SortPropEnum,
-} from '../redux/slices/filterSlice';
+import { setSort, setOrderSort } from '../redux/slices/filterSlice';
+import { TSort } from '../@types/TSort';
+import { SortPropEnum } from '../@types/SortPropEnum';
 
-export const listExport: Sort[] = [
+export const listExport: TSort[] = [
   { name: 'популярности', sortBy: SortPropEnum.RATING },
   { name: 'цене', sortBy: SortPropEnum.PRICE },
   { name: 'алфавиту', sortBy: SortPropEnum.TITLE },
 ];
 
 type TSortPopup = {
-  sort: Sort;
+  sort: TSort;
   orderSort: boolean;
 };
 
@@ -24,7 +21,7 @@ const SortPopup: React.FC<TSortPopup> = React.memo(({ sort, orderSort }) => {
   const dispatch = useDispatch();
   const sortRef = useRef<HTMLDivElement>(null);
 
-  function handleSort(obj: Sort) {
+  function handleSort(obj: TSort) {
     dispatch(setSort(obj));
     setSortPopup(false);
   }

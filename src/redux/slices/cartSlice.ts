@@ -1,24 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 import { getCartFromLS } from '../../utils/getCartFromLS';
-import { calcTotalPrice } from '../../utils/calcTotalPrice';
+import { TCartItem } from '../../@types/TCartItem';
 
-export type TCartItem = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  type: string;
-  size: number;
-  count: number;
-};
+const cartData = getCartFromLS();
 
 interface CartSliceState {
   totalPrice: number;
   items: TCartItem[];
 }
-
-const cartData = getCartFromLS();
 
 const initialState: CartSliceState = {
   totalPrice: cartData.totalPrice,

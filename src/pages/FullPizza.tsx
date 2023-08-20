@@ -62,6 +62,11 @@ const FullPizza: React.FC = () => {
         </p>
         <p>Цена: от {pizzaData.price} ₽</p>
         <p>{/* Description */}</p>
+        <Link to="/">
+          <button className="button button--outline button--add">
+            <span>Назад</span>
+          </button>
+        </Link>
       </main>
     </div>
   );

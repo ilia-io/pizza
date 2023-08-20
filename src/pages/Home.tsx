@@ -1,17 +1,19 @@
-import { useContext, useEffect, useCallback } from 'react';
-import Categories from '../components/Categories';
-import Loader from '../components/Loader';
-import PizzaBlock from '../components/PizzaBlock';
-import SortPopup from '../components/SortPopup';
-import Pagination from '../components/Pagination/Pagination';
+import { useContext, useEffect, useCallback, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
 import { AppContext } from '../components/Layout';
 import { useAppDispatch } from '../redux/store';
 import { fetchPizza } from '../redux/asyncActions';
+
+import {
+  Loader,
+  PizzaBlock,
+  Categories,
+  SortPopup,
+  Pagination,
+} from '../components';
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
@@ -41,7 +43,7 @@ const Home: React.FC = () => {
     );
   };
 
-  //Если изменили параметры и был первый рендер
+  // Если изменили параметры и был первый рендер
   useEffect(() => {
     if (isMounted.current) {
       const queryString = qs.stringify({
@@ -55,7 +57,7 @@ const Home: React.FC = () => {
     }
     isMounted.current = true;
   }, [categoryId, sort, orderSort, currentPage]);
-  //, searchValue
+  // , searchValue
 
   //Если был первый рендер, проверяем URL-параметры и сохраняем в редаксе
   // useEffect(() => {

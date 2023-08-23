@@ -4,7 +4,7 @@ import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../components/Layout';
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
 import { fetchPizza } from '../redux/asyncActions';
 
 import {
@@ -14,15 +14,16 @@ import {
   SortPopup,
   Pagination,
 } from '../components';
+import { TPizza } from '../@types/TPizza';
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef<boolean>(false);
   const { searchValue } = useContext(AppContext);
   const { categoryId, sort, currentPage, orderSort } = useSelector(
-    (state: any) => state.filter
+    (state: RootState) => state.filter
   );
-  const { items, status } = useSelector((state: any) => state.pizza);
+  const { items, status } = useSelector((state: RootState) => state.pizza);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -87,7 +88,7 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
-  const pizzasMapped = items.map((item: any) => (
+  const pizzasMapped = items.map((item: TPizza) => (
     <PizzaBlock key={item.id} {...item} />
   ));
   const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);

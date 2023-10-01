@@ -45,6 +45,8 @@ export const filterSlice = createSlice({
         state.currentPage = action.payload.currentPage;
         state.categoryId = action.payload.categoryId;
         state.sort = action.payload.sort;
+        state.searchValue = action.payload.searchValue;
+        state.orderSort = action.payload.orderSort;
       } else {
         state.currentPage = 1;
         state.categoryId = '0';
@@ -52,6 +54,8 @@ export const filterSlice = createSlice({
           name: 'популярности',
           sortBy: SortPropEnum.RATING,
         };
+        state.searchValue = '';
+        state.orderSort = false;
       }
     },
   },

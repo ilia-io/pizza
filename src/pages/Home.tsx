@@ -71,7 +71,7 @@ const Home: React.FC = () => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sort = listExport.find((obj) => obj.sortBy === params.sortBy);
-      const order = params.order === 'false' ? false : true;
+      const order = params.orderSort === 'false' ? false : true;
 
       dispatch(
         setFilters({

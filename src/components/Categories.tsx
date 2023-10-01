@@ -1,9 +1,8 @@
-
 import React from 'react';
 
 type CategoriesProps = {
-  categoryId: number;
-  onChangeCategory: (i: number) => void;
+  categoryId: string;
+  onChangeCategory: (i: string) => void;
 };
 
 const categories = [
@@ -22,8 +21,8 @@ const Categories: React.FC<CategoriesProps> = React.memo(
         <ul>
           {categories.map((item, index) => (
             <li
-              onClick={() => onChangeCategory(index)}
-              className={categoryId === index ? 'active' : ''}
+              onClick={() => onChangeCategory(String(index))}
+              className={Number(categoryId) === index ? 'active' : ''}
               key={index}
             >
               {item}

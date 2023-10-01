@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const URL = `https://62bdd39cc5ad14c110c766bb.mockapi.io/pizzas`;
 
-type SearchPizzaParams = {
+export type SearchPizzaParams = {
   category: string;
   sortBy: string;
   order: string;

@@ -3,7 +3,7 @@ import { SortPropEnum } from '../../@types/SortPropEnum';
 import { TSort } from '../../@types/TSort';
 
 export interface FilterSliceState {
-  categoryId: number;
+  categoryId: string;
   sort: TSort;
   currentPage: number;
   searchValue: string;
@@ -11,7 +11,7 @@ export interface FilterSliceState {
 }
 
 const initialState: FilterSliceState = {
-  categoryId: 0,
+  categoryId: '0',
   sort: {
     name: 'популярности',
     sortBy: SortPropEnum.RATING,
@@ -25,7 +25,7 @@ export const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategoryId(state, action: PayloadAction<number>) {
+    setCategoryId(state, action: PayloadAction<string>) {
       state.categoryId = action.payload;
     },
     setSort(state, action: PayloadAction<TSort>) {
@@ -42,12 +42,12 @@ export const filterSlice = createSlice({
     },
     setFilters(state, action: PayloadAction<FilterSliceState>) {
       if (Object.keys(action.payload).length) {
-        state.currentPage = Number(action.payload.currentPage);
-        state.categoryId = Number(action.payload.categoryId);
+        state.currentPage = action.payload.currentPage;
+        state.categoryId = action.payload.categoryId;
         state.sort = action.payload.sort;
       } else {
         state.currentPage = 1;
-        state.categoryId = 0;
+        state.categoryId = '0';
         state.sort = {
           name: 'популярности',
           sortBy: SortPropEnum.RATING,

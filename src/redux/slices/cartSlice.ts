@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 import { getCartFromLS } from '../../utils/getCartFromLS';
 import { TCartItem } from '../../@types/TCartItem';
 
@@ -62,8 +61,6 @@ export const cartSlice = createSlice({
     },
   },
 });
-
-export const cartSelector = (state: RootState) => state.cart;
 
 export const { addItem, removeItem, clearCart, minusItem } = cartSlice.actions;
 

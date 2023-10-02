@@ -1,5 +1,4 @@
-import { useContext, useEffect, useCallback, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useCallback, useRef } from 'react';
 import {
   setCategoryId,
   setCurrentPage,
@@ -7,10 +6,8 @@ import {
 } from '../redux/slices/filterSlice';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../components/Layout';
-import { RootState, useAppDispatch } from '../redux/store';
-import { SearchPizzaParams, fetchPizza } from '../redux/asyncActions';
-
+import { useAppDispatch, useAppSelector } from '../redux/store';
+import { fetchPizza } from '../redux/asyncActions';
 import {
   Loader,
   PizzaBlock,
@@ -24,11 +21,12 @@ import { listExport } from '../components/SortPopup';
 const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef<boolean>(false);
-  const { searchValue } = useContext(AppContext);
-  const { categoryId, sort, currentPage, orderSort } = useSelector(
-    (state: RootState) => state.filter
+  const { searchValue } = useAppSelector((state) => state.filter);
+
+  const { categoryId, sort, currentPage, orderSort } = useAppSelector(
+    (state) => state.filter
   );
-  const { items, status } = useSelector((state: RootState) => state.pizza);
+  const { items, status } = useAppSelector((state) => state.pizza);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -37,7 +35,6 @@ const Home: React.FC = () => {
     const sortBy = sort.sortBy;
     const order = orderSort ? `asc` : `desc`;
     const search = searchValue ? `title=${searchValue}` : ``;
-
     dispatch(
       fetchPizza({
         category,
@@ -64,7 +61,6 @@ const Home: React.FC = () => {
     }
     isMounted.current = true;
   }, [categoryId, sort, orderSort, currentPage, searchValue]);
-  // , searchValue
 
   //Если был первый рендер, проверяем URL-параметры и сохраняем в редаксе
   useEffect(() => {
@@ -95,16 +91,9 @@ const Home: React.FC = () => {
     isSearch.current = false;
   }, [categoryId, sort, orderSort, searchValue, currentPage]);
 
-  const pizzasMapped = items.map((item: TPizza) => (
-    <PizzaBlock key={item.id} {...item} />
-  ));
-  const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
-
-  //.filter((e) => e.title.toLowerCase().includes(searchValue.toLowerCase()))
-
   const onChangeCategory = useCallback((id: string) => {
     dispatch(setCategoryId(id));
-    dispatch(setCurrentPage(1));
+    //dispatch(setCurrentPage(1));
   }, []);
 
   const onChangePage = (page: number) => {
@@ -114,6 +103,17 @@ const Home: React.FC = () => {
   const onClickReloadPage = () => {
     window.location.reload();
   };
+
+  const pizzasMapped = items
+    .filter((pizza) =>
+      pizza.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    .map((item: TPizza) => <PizzaBlock key={item.id} {...item} />);
+
+  // .filter((pizza) =>pizza.title.toLowerCase().includes(searchValue.toLowerCase()))
+
+  const loaderMapped = [...Array(4)].map((_, index) => <Loader key={index} />);
+
   return (
     <div className="container">
       <div className="content__top">

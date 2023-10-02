@@ -1,11 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import Search from './Search/Search';
-import { useSelector } from 'react-redux';
-import { cartSelector } from '../redux/slices/cartSlice';
 import { useEffect, useRef } from 'react';
+import { useAppSelector } from '../redux/store';
 
 const Header: React.FC = () => {
-  const { items, totalPrice } = useSelector(cartSelector);
+  const { items, totalPrice } = useAppSelector((state) => state.cart);
   const isMounted = useRef(false);
 
   const totalAmount = items.reduce(

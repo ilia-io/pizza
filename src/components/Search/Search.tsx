@@ -1,13 +1,23 @@
 import debounce from 'lodash.debounce';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import styles from './Search.module.scss';
 import { useAppDispatch } from '../../redux/store';
 import { setSearchValue } from '../../redux/slices/filterSlice';
+import qs from 'qs';
 
 const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      if (params.searchValue) {
+        setValue(params.searchValue as string);
+      }
+    }
+  }, []);
 
   const memoizedDebounce = useCallback(
     debounce((value) => {

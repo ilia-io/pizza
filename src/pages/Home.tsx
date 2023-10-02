@@ -21,11 +21,8 @@ import { listExport } from '../components/SortPopup';
 const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef<boolean>(false);
-  const { searchValue } = useAppSelector((state) => state.filter);
-
-  const { categoryId, sort, currentPage, orderSort } = useAppSelector(
-    (state) => state.filter
-  );
+  const { categoryId, sort, currentPage, orderSort, searchValue } =
+    useAppSelector((state) => state.filter);
   const { items, status } = useAppSelector((state) => state.pizza);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -93,7 +90,7 @@ const Home: React.FC = () => {
 
   const onChangeCategory = useCallback((id: string) => {
     dispatch(setCategoryId(id));
-    //dispatch(setCurrentPage(1));
+    dispatch(setCurrentPage(1));
   }, []);
 
   const onChangePage = (page: number) => {

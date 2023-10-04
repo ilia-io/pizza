@@ -10,17 +10,30 @@ export type SearchPizzaParams = {
   category: string;
   sortBy: string;
   order: string;
-  search: string;
-  currentPage: number;
+  search?: string;
+  currentPage?: number;
+  itemsPerPage?: number;
+  searchString: string;
 };
 
 export const fetchPizza = createAsyncThunk<TPizza[], SearchPizzaParams>(
   'pizza/fetchPizza',
   async (params) => {
-    const { category, sortBy, order, search, currentPage } = params;
-    const { data } = await axios.get<TPizza[]>(
-      `${URL}?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}`
+    const {
+      category,
+      sortBy,
+      order,
+      search,
+      currentPage,
+      itemsPerPage,
+      searchString,
+    } = params;
+    const response = await axios.get<TPizza[]>(
+      `${URL}?&${category}&sortBy=${sortBy}&order=${order}`
     );
-    return data;
+    const searchSorted = response.data.filter((pizza) =>
+      pizza.title.toLowerCase().includes(searchString.toLowerCase())
+    );
+    return searchSorted;
   }
 );

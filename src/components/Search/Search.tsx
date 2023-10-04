@@ -1,8 +1,8 @@
 import debounce from 'lodash.debounce';
 import { useRef, useState, useCallback, useEffect } from 'react';
 import styles from './Search.module.scss';
-import { useAppDispatch } from '../../redux/store';
-import { setSearchValue } from '../../redux/slices/filterSlice';
+import { useAppDispatch} from '../../redux/store';
+import { setCurrentPage, setSearchValue } from '../../redux/slices/filterSlice';
 import qs from 'qs';
 
 const Search: React.FC = () => {
@@ -22,7 +22,8 @@ const Search: React.FC = () => {
   const memoizedDebounce = useCallback(
     debounce((value) => {
       dispatch(setSearchValue(value));
-    }, 400),
+      dispatch(setCurrentPage(1));
+    }, 300),
     []
   );
 

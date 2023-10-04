@@ -5,9 +5,9 @@ import { TSort } from '../../@types/TSort';
 export interface FilterSliceState {
   categoryId: string;
   sort: TSort;
+  orderSort: boolean;
   currentPage: number;
   searchValue: string;
-  orderSort: boolean;
 }
 
 const initialState: FilterSliceState = {
